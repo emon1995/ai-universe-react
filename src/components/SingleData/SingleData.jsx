@@ -39,7 +39,11 @@ const SingleData = (props) => {
                 <h1 className="ml-4">{published_in}</h1>
               </div>
             </div>
-            <label htmlFor="my-modal-5" className="btn btn-primary">
+            <label
+              onClick={() => props.setUnique(id)}
+              htmlFor="my-modal-5"
+              className="btn btn-primary"
+            >
               Buy Now
               <svg
                 xmlns="http://www.w3.org/2000/svg"

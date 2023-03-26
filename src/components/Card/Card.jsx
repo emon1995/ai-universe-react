@@ -6,6 +6,8 @@ import SingleData from "../SingleData/SingleData";
 const Card = () => {
   const [data, setData] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [unique, setUnique] = useState(null);
+  const [modalData, setModalData] = useState({});
 
   useEffect(() => {
     const loadData = async () => {
@@ -22,15 +24,29 @@ const Card = () => {
     };
     loadData();
   }, []);
+  // console.log(unique);
+
+  useEffect(() => {
+    fetch(`https://openapi.programming-hero.com/api/ai/tool/${unique}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data.data);
+        setModalData(data.data);
+      });
+  }, [unique]);
 
   return (
     <>
       <div className="my-12 lg:mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {data.slice(0, showAll ? 12 : 6).map((singleData) => (
-          <SingleData key={singleData.id} singleData={singleData} />
+          <SingleData
+            key={singleData.id}
+            setUnique={setUnique}
+            singleData={singleData}
+          />
         ))}
       </div>
-      <Modal />
+      <Modal modalData={modalData} />
       <small onClick={() => setShowAll(!showAll)}>
         <Button>{showAll ? "See Hide" : "See More"}</Button>
       </small>
