@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 import SingleData from "../SingleData/SingleData";
 
 const Card = () => {
   const [data, setData] = useState([]);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -21,11 +24,17 @@ const Card = () => {
   }, []);
 
   return (
-    <div className="my-12 lg:mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {data.map((singleData) => (
-        <SingleData key={singleData.id} singleData={singleData} />
-      ))}
-    </div>
+    <>
+      <div className="my-12 lg:mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {data.slice(0, showAll ? 12 : 6).map((singleData) => (
+          <SingleData key={singleData.id} singleData={singleData} />
+        ))}
+      </div>
+      <Modal />
+      <small onClick={() => setShowAll(!showAll)}>
+        <Button>{showAll ? "See Hide" : "See More"}</Button>
+      </small>
+    </>
   );
 };
 
