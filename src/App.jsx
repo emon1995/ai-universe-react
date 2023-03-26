@@ -1,19 +1,14 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import Button from "./components/Button/Button";
+import Card from "./components/Card/Card";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <button className="btn">Button</button>
-      <button className="btn btn-primary">Button</button>
-      <button className="btn btn-secondary">Button</button>
-      <button className="btn btn-accent">Button</button>
-      <button className="btn btn-ghost">Button</button>
-      <button className="btn btn-link">Button</button>
+    <div className="App mt-12">
+      <h1 className="text-center text-2xl font-bold mb-4">AI Universe Hub</h1>
+      <Button>Sort By Date</Button>
+      <Card />
     </div>
   );
 }
