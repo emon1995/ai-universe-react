@@ -9,6 +9,13 @@ const Card = () => {
   const [unique, setUnique] = useState(null);
   const [modalData, setModalData] = useState({});
 
+  const handleSort = () => {
+    const sortedData = data.sort((a, b) => {
+      return new Date(a.published_in) - new Date(b.published_in);
+    });
+    setData([...data, sortedData]);
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -37,6 +44,9 @@ const Card = () => {
 
   return (
     <>
+      <small onClick={handleSort}>
+        <Button>Sort By Date</Button>
+      </small>
       <div className="my-12 lg:mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {data.slice(0, showAll ? 12 : 6).map((singleData) => (
           <SingleData
